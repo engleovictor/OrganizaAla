@@ -17,17 +17,28 @@ document.addEventListener('click', event => {
         // criará uma um quarto;
         const nome_do_quarto = window.prompt("Digite o Nome/Numero do quarto:");
         if(nome_do_quarto != null) {
-            document.body.innerHTML += `<div class="quarto" id="quarto${nome_do_quarto}">${nome_do_quarto}</div>`;
-            if(quartoSelecionado != null) {
-                console.log(quartoSelecionado.innerHTML)
-                quartoSelecionado.style.borderColor = 'black';
-            }
-            quartoSelecionado = document.querySelector(`#quarto${nome_do_quarto}`);
-            quartoSelecionado.style.borderColor = 'blue';
+            addQuartoHTML(nome_do_quarto,"").then(() => {
+                mudarCorNaCriacao((quartoSelecionado != null)).then( () => {
+                    quartoSelecionado = document.querySelector(`#quarto${nome_do_quarto}`);
+                    quartoSelecionado.style.borderColor = 'blue';
+                }).catch( () => {
+                    quartoSelecionado = document.querySelector(`#quarto${nome_do_quarto}`);
+                    quartoSelecionado.style.borderColor = 'blue';
+                })
+            });
         }
-    } if(tagValue == "Criar Beliche") {
+
+    } 
+    
+    if(tagValue == "Criar Beliche") {
         if(quartoSelecionado != null) quartoSelecionado.innerHTML += '<div class="beliche"><div class="beliche-superior"></div><div class="beliche-inferior"></div></div>';
         else window.alert("Voce deve criar um quarto primeiro!!");
+        // let beliches = document.querySelector(".beliche");
+        // for(let beliche of beliches) {
+        // beliche.addEventListener('drag', event => {
+        //     console.log(event);
+        // })
+
     } 
 
     if(tagValue == "Criar Treliche") {
@@ -50,6 +61,10 @@ document.addEventListener('click', event => {
         }
     }
 
+    if(tagValue == "Copiar Quarto") {
+        if(quartoSelecionado != null) copiarQuarto();
+    }
+
     // Clicar em div pra adicionar nome;
     if(className == 'beliche-superior' || className == 'beliche-inferior' ||
        className == 'treliche-superior'|| className == 'treliche-meio'    || 
@@ -59,21 +74,31 @@ document.addEventListener('click', event => {
     } 
 
     $(document).ready( () => {
-        $(".beliche").draggable();
-        $(".treliche").draggable();
-        $(".armario").draggable();
-        $(".fila-armario").draggable();
+        $(".beliche, .treliche, .armario, .fila-armario").draggable();
+        $(".trash").droppable({
+                drop: function(event, ui) {
+                ui.draggable.remove();
+            }
+        });
     });
-    
+
 })
 
 document.addEventListener("keydown", event => {
     
     const className = targetTag.getAttribute('class');
 
+    const cnds = className === "beliche ui-draggable ui-draggable-handle" ||
+    className === "trelice ui-draggable ui-draggable-handle" ||
+    className === "armario ui-draggable ui-draggable-handle" ||
+    className === "armario" ||
+    className === "quarto";
 
-    if (event.key === "Delete") {
-        console.log(className);
+    if (event.key === "Delete" && cnds) {
+        if(className === "quarto") {
+            //
+        }
+        targetTag.remove()
     }
 })
 
@@ -83,5 +108,44 @@ const criarFilaDeArmarios = n => {
     divver += '</div>';
     return divver;
 }
-1
-//  const copiarQuarto()
+
+const copiarQuarto = () => {
+    // const qid = quartoSelecionado.getAttribute("id");
+    // console.log(qid);
+    novoQuarto = quartoSelecionado.innerHTML;
+    nomeNovoQuarto = prompt("Digite o nome do novo quarto:");
+    if(nomeNovoQuarto != null) {
+        addQuartoHTML(nomeNovoQuarto,novoQuarto).then(() => {
+            mudarCorNaCriacao((quartoSelecionado != null)).then( () => {
+                quartoSelecionado = document.querySelector(`#quarto${nome_do_quarto}`);
+                quartoSelecionado.style.borderColor = 'blue';
+            }).catch( () => {
+                quartoSelecionado = document.querySelector(`#quarto${nome_do_quarto}`);
+                quartoSelecionado.style.borderColor = 'blue';
+            })
+        });
+    }
+    
+}
+
+const addQuartoHTML = (nome_do_quarto,mov) => {
+    return new Promise((resolve, reject) => {
+        document.body.innerHTML += `<div class="quarto" id="quarto${nome_do_quarto}">${nome_do_quarto} ${mov}</div>`;
+        resolve();
+    })
+}
+
+const mudarCorNaCriacao = stat => {
+    return new Promise((resolve, reject) => {
+        if(stat) {
+
+            const quartoVelho = quartoSelecionado;
+            quartoVelho.style.borderColor = 'black'
+            console.log(quartoVelho.getAttribute("id"));
+            resolve();
+
+        } else {
+            reject();
+        }
+    });
+}

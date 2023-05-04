@@ -116,6 +116,16 @@
     height: 40px;
 }
 
+.trash {
+    width: 400px;
+    height: 400px;
+    background-color: grey;
+}
+
+.trash-img {
+    width: 400px;
+}
+
 body {
     display: inline-flex;
 }
