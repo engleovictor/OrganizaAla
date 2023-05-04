@@ -1,0 +1,121 @@
+.side-bar {
+    background-color: #6DB65B;
+    display: inline-block;
+}
+
+.option {
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    margin-left: 10%;
+    margin-right: 20%;
+}
+
+.quarto {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 30px;
+    margin-left: 10px;
+    padding: 3px;
+    width: 1200px;
+    height: 800px;
+    border: 5px solid black;
+}
+
+.beliche {
+    font-size: 30px;
+    margin-left: 10px;
+    width: 100px;
+    height: 70px;
+    border: 5px solid black;
+}
+
+.beliche-superior {
+    font-size: 15px;
+    padding: 0px;
+    margin: 0px;
+    height: 33px;
+    width: 100px;
+    border-bottom: 5px solid black;
+}
+
+.beliche-inferior {
+    font-size: 15px;
+    padding: 0px;
+    margin: 0px;
+    height: 33px;
+    width: 100px;
+
+}
+
+.treliche {
+    font-size: 30px;
+    margin-left: 10px;
+    width: 100px;
+    height: 105px;
+    border: 5px solid black;
+}
+
+.treliche-superior {
+    font-size: 15px;
+    padding: 0px;
+    margin: 0px;
+    height: 33px;
+    width: 100px;
+    border-bottom: 5px solid black;
+}
+
+.treliche-meio {
+    font-size: 15px;
+    padding: 0px;
+    margin: 0px;
+    height: 33px;
+    width: 100px;
+}
+
+.treliche-inferior {
+    font-size: 15px;
+    padding: 0px;
+    margin: 0px;
+    height: 33px;
+    width: 100px;
+    border-top: 5px solid black;
+}
+
+.armario {
+    font-size: 15px;
+    margin: 0px;
+    padding: 0px;
+    width: 50px;
+    height: 80px;
+    border: 5px solid black;
+}
+
+.armariof {
+    font-size: 15px;
+    margin: 0px;
+    padding: 0px;
+    width: 50px;
+    height: 80px;
+    border: 5px solid black;
+}
+
+.armario-cima {
+    font-size: 15px;
+    margin: 0px;
+    padding: 0px;
+    width: 50px;
+    height: 40px;
+    border-bottom: 2px solid black;
+}
+
+.armario-baixo {
+    font-size: 15px;
+    margin: 0px;
+    padding: 0px;
+    width: 46px;
+    height: 40px;
+}
+
+body {
+    display: inline-flex;
+}
